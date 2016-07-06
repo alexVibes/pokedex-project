@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pokedex App</title>
+	<!--Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- AngularJS -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<!-- Personal JS -->
+	<script type="text/javascript" src="js/app.js"></script>
+</head>
+<body ng-app="pokedexApp" ng-controller="appCtrl">
+	<div class="container">
+		<header>
+			<div class="jumbotron text-center">
+					<h1>Pokedex</h1>
+			</div>
+		</header>
+		<main>
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-6">
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-favourites" ng-click="showFavourites()">Favourites</button>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-6 text-center">
+					<a ng-hide="selected.type == type.name" ng-click="selected.type = null">
+						<span class="glyphicon glyphicon-remove"></span> Remove
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-6">
+					<div class="col-md-4 col-sm-6 col-xs-12 text-center item item_favourite" ng-repeat="item in viewFavourites | type: selected.type">
+						<a ng-click="selected.item = item">
+							<img class="item__image" ng-src="http://pokeapi.co/media/img/{{item.national_id}}.png" alt="Image">
+							<p>{{item.name}}</p>
+						</a>
+						<ul class="nav nav-tabs bg-info">
+							<li class="type" ng-repeat="type in item.types">
+								<span class="label label-default" ng-class="'{{type.name}}'" ng-click="selected.type = type.name">{{type.name}}</span>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-sm-6 text-center item" ng-repeat="item in data | type: selected.type" >
+						<a href="" ng-click="selected.item = item">
+							<img class="item__image" ng-src="http://pokeapi.co/media/img/{{item.national_id}}.png" alt="Image" >
+							<p>{{item.name}}</p>
+						</a>
+						<ul class="nav nav-tabs bg-info">
+							<li class="type" ng-repeat="type in item.types">
+								<span class="label label-default" ng-class="'{{type.name}}'" ng-click="selected.type = type.name">{{type.name}}</span>
+							</li>
+						</ul>
+						<span class="glyphicon glyphicon-heart nav-tabs__like" ng-click="like($index)" ng-class="{'nav-tabs__like_active': item.like}"></span>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-sm-4 col-xs-6 text-center">
+					<div class="col-md-12 fixed bg-info" ng-init="selected.item = null" ng-show="selected.item === null ? false : true">
+						<a class="pull-right" ng-click="selected.item = null">
+							<i class="glyphicon glyphicon-remove"></i>
+						</a>
+						<img ng-src="http://pokeapi.co/media/img/{{selected.item.national_id}}.png" alt="Image">
+						<p>{{selected.item.name}}</p>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>Type</td>
+									<td>
+										<p class="label label-default" ng-repeat="type in selected.item.types" ng-class="'{{type.name}}'">{{type.name}}</p>
+									</td>
+								</tr>
+								<tr>
+									<td>Attack</td>
+									<td>{{selected.item.attack}}</td>
+								</tr>
+								<tr>
+									<td>Defense</td>
+									<td>{{selected.item.defense}}</td>
+								</tr>
+								<tr>
+									<td>HP</td>
+									<td>{{selected.item.hp}}</td>
+								</tr>
+								<tr>
+									<td>SP Attack</td>
+									<td>{{selected.item.sp_atk}}</td>
+								</tr>
+								<tr>
+									<td>SP Defense</td>
+									<td>{{selected.item.sp_def}}</td>
+								</tr>
+								<tr>
+									<td>Speed</td>
+									<td>{{selected.item.speed}}</td>
+								</tr>
+								<tr>
+									<td>Weight</td>
+									<td>{{selected.item.weight}}</td>
+								</tr>
+								<tr>
+									<td>Total moves</td>
+									<td>{{selected.item.moves.length}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-6">
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-more" ng-click="loadMore()">Load More</button>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>
