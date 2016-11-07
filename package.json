@@ -1,7 +1,7 @@
 {
   "name": "PokedexProject",
   "version": "1.0.0",
-  "author": "O. Morhun",
+  "author": "alxvbs",
   "devDependencies": {
     "autoprefixer-stylus": "^0.9.4",
     "del": "^2.2.1",

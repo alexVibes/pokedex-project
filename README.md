@@ -1,8 +1,14 @@
-# Install project
+# Pokedex Project
 
-1. git clone https://github.com/alexVibes/pokedex-project.git
-2. npm i -g gulp
-3. cd ...
-4. npm i
-5. gulp build
-6. open ../public/index.html
+## Open project
+
+* http://pokedex.cc.ua/
+
+## Install project
+
+* git clone https://github.com/alxvbs/pokedex-project.git
+* npm i -g gulp
+* cd ...
+* npm i
+* gulp build
+* open '../public/index.html'
